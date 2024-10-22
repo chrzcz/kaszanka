@@ -1,0 +1,36 @@
+﻿<Window x:Class="Kaszanka.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kaszanka" 
+        xmlns:viewmodels="clr-namespace:Kaszanka.ViewModels" xmlns:views="clr-namespace:Kaszanka.Views"
+        mc:Ignorable="d"
+        Title="Kaszanka REST client" Height="700" Width="800" Padding="5">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Button Command="{Binding AddNewRequest}" Grid.Row="0">Add</Button>
+            <ListBox d:ItemsSource="{d:SampleData}" ItemsSource="{Binding Requests}" Grid.Row="1" IsSynchronizedWithCurrentItem="true" d:SelectedIndex="1">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Grid.Row="2">
+                <Button Command="{Binding SaveRequests}">Save collection</Button>
+                <Button Command="{Binding ReadRequests}">Read collection</Button>
+            </StackPanel>
+        </Grid>
+        <views:RequestView Grid.Column="1" DataContext="{Binding Requests/}" />
+    </Grid>
+</Window>
